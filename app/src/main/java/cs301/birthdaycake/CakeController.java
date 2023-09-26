@@ -3,9 +3,10 @@ package cs301.birthdaycake;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.SeekBar;
 
-public class CakeController implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
+public class CakeController implements View.OnClickListener, SeekBar.OnSeekBarChangeListener , CompoundButton.OnCheckedChangeListener{
     private CakeView view;
     private CakeModel model;
 
@@ -17,13 +18,12 @@ public class CakeController implements View.OnClickListener, SeekBar.OnSeekBarCh
     @Override
     public void onClick(View viewy) {
         Log.d("CakeController", "onClick");
-        if(viewy instanceof Button)
-        {
+        if(viewy instanceof Button) {
             Button bOB = (Button)viewy;
-            if (model.candleLit == false) {
+            if (model.candleLit == true) {
                 model.candleLit = false;
                 bOB.setText("Relight");
-            } else if (model.candleLit == true) {
+            } else if (model.candleLit == false) {
                 model.candleLit = true;
                 bOB.setText("Blow Out");
             }
@@ -31,7 +31,7 @@ public class CakeController implements View.OnClickListener, SeekBar.OnSeekBarCh
         }
     }
 
-    public void onCheckedChanged(View viewy) {
+    public void onCheckedChanged(CompoundButton viewy, boolean b) {
         Log.d("CakeController", "onCheckedChanged");
         if (model.hasCandles == true) {
             model.hasCandles = false;
