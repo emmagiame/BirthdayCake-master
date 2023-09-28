@@ -12,6 +12,9 @@ import android.view.SurfaceView;
 public class CakeView extends SurfaceView {
     private CakeModel cakeModel = new CakeModel();
 
+    public float x;
+    public float y;
+
     public CakeModel getCakeModel(){
         return cakeModel;
     }
@@ -23,6 +26,8 @@ public class CakeView extends SurfaceView {
     Paint outerFlamePaint = new Paint();
     Paint innerFlamePaint = new Paint();
     Paint wickPaint = new Paint();
+
+    Paint red = new Paint();
 
     /* These constants define the dimensions of the cake.  While defining constants for things
         like this is good practice, we could be calculating these better by detecting
@@ -66,6 +71,9 @@ public class CakeView extends SurfaceView {
         innerFlamePaint.setStyle(Paint.Style.FILL);
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
+        red.setColor(Color.RED);
+        //red.setStyle(Paint.Style.FILL);
+        red.setTextSize(40);
 
         setBackgroundColor(Color.WHITE);  //better than black default
 
@@ -110,6 +118,7 @@ public class CakeView extends SurfaceView {
         float top = cakeTop;
         float bottom = cakeTop + frostHeight;
 
+
         //Frosting on top
         canvas.drawRect(cakeLeft, top, cakeLeft + cakeWidth, bottom, frostingPaint);
         top += frostHeight;
@@ -136,6 +145,9 @@ public class CakeView extends SurfaceView {
                 drawCandle(canvas, cakeLeft+(i+1)*(spacing), cakeTop);
             }
 
+        }
+        if(cakeModel.touch == true) {
+            canvas.drawText("x = " +x+" y = "+y,1600, 450, red);
         }
     }//onDraw
 

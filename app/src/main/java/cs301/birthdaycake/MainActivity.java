@@ -21,10 +21,14 @@ public class MainActivity extends AppCompatActivity {
         blowOutButton.setOnClickListener(cakeController);
         SeekBar pickNumCandles = this.findViewById(R.id.pickNumCandles);
         pickNumCandles.setOnSeekBarChangeListener(cakeController);
+        cakeView.setOnTouchListener(cakeController);
+
     }
     public void goodbye(View button){
         Log.i("button","Goodbye.");
         finishAffinity();
     }
+
+
 
 }
