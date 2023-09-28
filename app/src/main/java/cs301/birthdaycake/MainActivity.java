@@ -15,12 +15,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_main);
+
+        //the screen
         CakeView cakeView = findViewById(R.id.cakeview);
         CakeController cakeController = new CakeController(cakeView);
+
         Button blowOutButton = this.findViewById(R.id.blowOutButton);
         blowOutButton.setOnClickListener(cakeController);
+
         SeekBar pickNumCandles = this.findViewById(R.id.pickNumCandles);
         pickNumCandles.setOnSeekBarChangeListener(cakeController);
+
+        //sets an on touch listener to the screen
+        cakeView.setOnTouchListener(cakeController);
+
     }
     public void goodbye(View button){
         Log.i("button","Goodbye.");
