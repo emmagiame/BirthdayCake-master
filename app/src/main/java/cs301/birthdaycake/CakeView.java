@@ -12,6 +12,9 @@ import android.view.SurfaceView;
 public class CakeView extends SurfaceView {
     private CakeModel cakeModel = new CakeModel();
 
+    public float x;
+    public float y;
+
     public CakeModel getCakeModel(){
         return cakeModel;
     }
@@ -26,6 +29,8 @@ public class CakeView extends SurfaceView {
 
     Paint balloonColor = new Paint();
     //Paint balloonLine = new Paint();
+
+    Paint red = new Paint();
 
     /* These constants define the dimensions of the cake.  While defining constants for things
         like this is good practice, we could be calculating these better by detecting
@@ -69,6 +74,9 @@ public class CakeView extends SurfaceView {
         innerFlamePaint.setStyle(Paint.Style.FILL);
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
+        red.setColor(Color.RED);
+        //red.setStyle(Paint.Style.FILL);
+        red.setTextSize(40);
 
         setBackgroundColor(Color.WHITE);  //better than black default
 
@@ -103,8 +111,8 @@ public class CakeView extends SurfaceView {
     public void drawBalloon(Canvas canvas){
         balloonColor.setColor(Color.BLUE);
         //balloonLine.setColor(Color.BLACK);
-        canvas.drawLine(cakeModel.balloonX, cakeModel.balloonY, cakeModel.balloonX, cakeModel.balloonY+50, wickPaint);
-        canvas.drawOval(cakeModel.balloonX-15, cakeModel.balloonY-20, cakeModel.balloonX+15, cakeModel.balloonY+20, balloonColor );
+        canvas.drawLine(x, y, x, y+50, wickPaint);
+        canvas.drawOval(x-15, y-20, x+15, y+20, balloonColor );
 
     }
 
@@ -121,6 +129,7 @@ public class CakeView extends SurfaceView {
         //top and bottom are used to keep a running tally as we progress down the cake layers
         float top = cakeTop;
         float bottom = cakeTop + frostHeight;
+
 
         //Frosting on top
         canvas.drawRect(cakeLeft, top, cakeLeft + cakeWidth, bottom, frostingPaint);
@@ -148,9 +157,12 @@ public class CakeView extends SurfaceView {
                 drawCandle(canvas, cakeLeft+(i+1)*(spacing), cakeTop);
             }
 
-        if(cakeModel.isClicked == true){
+        }
+        if(cakeModel.touch == true) {
+            canvas.drawText("x = " +x+" y = "+y,1600, 450, red);
+        if(cakeModel.touch == true){
             drawBalloon(canvas);
-            cakeModel.isClicked = false;
+            cakeModel.touch = false;
 
         }
         }
